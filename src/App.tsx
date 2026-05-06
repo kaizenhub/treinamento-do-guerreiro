@@ -583,17 +583,10 @@ function TrailsGrid() {
                     </ul>
                   </div>
 
-                  {/* Bottom: Price & CTA */}
-                  <div className="mt-auto pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 sm:gap-0 w-full">
-                    <div>
-                      <div className="text-[11px] uppercase tracking-widest text-white/40 font-semibold mb-2">Investimento</div>
-                      <div className="text-3xl font-sora font-medium text-white tracking-tight">
-                        <span className="text-[16px] text-gray-500 font-light mr-1">R$</span>
-                        {trail.price}
-                      </div>
-                    </div>
-                    <div className="relative group/btnwrap w-full sm:w-auto">
-                      <a href={trail.link} target="_blank" rel="noopener noreferrer" className="relative rounded-full px-6 py-3 sm:py-2.5 flex items-center justify-center gap-2 text-[15px] sm:text-[14.5px] font-medium text-white group/btn h-full w-full">
+                  {/* Bottom: CTA */}
+                  <div className="mt-auto pt-8 border-t border-white/[0.06] w-full">
+                    <div className="relative group/btnwrap w-full">
+                      <a href={trail.link} target="_blank" rel="noopener noreferrer" className="relative rounded-full px-6 py-4 flex items-center justify-center gap-2 text-[16px] font-medium text-white group/btn w-full">
                         {/* Gradient Border */}
                         <div 
                           className={`absolute inset-0 rounded-full bg-gradient-to-r ${trail.glowClass} pointer-events-none`}
@@ -607,8 +600,8 @@ function TrailsGrid() {
                         {/* Hover Glow Background */}
                         <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${trail.glowClass} opacity-0 group-hover/btnwrap:opacity-[0.15] transition-opacity duration-300 pointer-events-none`}></div>
                         
-                        <span className="relative z-10">Entrar agora</span>
-                        <span className="relative z-10 text-lg leading-none transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
+                        <span className="relative z-10 tracking-wide">Garantir Minha Vaga</span>
+                        <span className="relative z-10 text-xl leading-none transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
                       </a>
                     </div>
                   </div>
