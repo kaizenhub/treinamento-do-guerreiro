@@ -465,7 +465,7 @@ function TrailsGrid() {
       title: "Escola de Libertadores",
       desc: "Para quem foi chamado a blindar vidas e tirar cativos das mãos do inimigo em alta intensidade espiritual.",
       price: "299,00",
-      link: "https://pay.kiwify.com.br/f6xoo4g",
+      link: "https://pay.kiwify.com.br/oOJsdEE",
       icon: <LockOpen className="w-5 h-5 text-orange-200" />,
       glowClass: "from-[#e94e1b] via-[#e94e1b] to-[#ff6b3d]",
       intro: "São mais de 40 aulas onde você vai aprender como operar em libertação, enfrentar batalhas espirituais de alto nível e tirar cativos das mãos do inimigo. Algumas delas são:",
