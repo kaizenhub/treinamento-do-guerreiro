@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Ministério Extraordinário | Luciano Faé</title>
+    <meta name="title" content="Ministério Extraordinário | Luciano Faé" />
+    <meta name="description" content="Uma trilha completa de formação espiritual para quem decidiu que não vai mais viver abaixo do seu chamado. Mentoria com Pastor Luciano Faé." />
+    <meta name="keywords" content="treinamento do guerreiro, luciano faé, mentoria espiritual, chamado, cura, milagres, escola de libertadores, ministério profético" />
+    <meta name="author" content="Luciano Faé" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ministério Extraordinário | Luciano Faé" />
+    <meta property="og:description" content="Uma trilha completa de formação espiritual para quem decidiu que não vai mais viver abaixo do seu chamado. Mentoria com Pastor Luciano Faé." />
+    <meta property="og:image" content="/social-image.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ministério Extraordinário | Luciano Faé" />
+    <meta name="twitter:description" content="Uma trilha completa de formação espiritual para quem decidiu que não vai mais viver abaixo do seu chamado." />
+    <meta name="twitter:image" content="/social-image.png" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    
+    <script>
+      // Prevent "Cannot set property fetch" TypeError from polyfills
+      if (typeof window !== 'undefined') {
+        const desc = Object.getOwnPropertyDescriptor(window, 'fetch');
+        if (desc && !desc.set && desc.configurable) {
+          Object.defineProperty(window, 'fetch', {
+            get: desc.get,
+            set: function() { /* ignore */ },
+            configurable: true
+          });
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
