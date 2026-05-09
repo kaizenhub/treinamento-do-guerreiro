@@ -710,134 +710,99 @@ function Testimonials() {
     }
   ];
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  // Desktop: 3 cards per page, Mobile: 1 card per page
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Auto-advance on mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const cardsPerPage = isMobile ? 1 : 3;
+  const totalPages = Math.ceil(testimonials.length / cardsPerPage);
+
+  // Auto-advance
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
+      setCurrentPage((prev) => (prev + 1) % totalPages);
+    }, 7000);
     return () => clearInterval(interval);
-  }, [testimonials.length]);
+  }, [totalPages]);
+
+  const visibleTestimonials = testimonials.slice(
+    currentPage * cardsPerPage,
+    currentPage * cardsPerPage + cardsPerPage
+  );
 
   return (
     <section className="py-24 lg:py-32 bg-[#050505] relative overflow-hidden border-t border-white/[0.02]" id="testimonials">
       <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
       
-      <div className="container mx-auto px-6 max-w-[1200px] relative z-10">
+      <div className="container mx-auto px-6 max-w-[1400px] relative z-10">
         <FadeIn className="text-center mb-16 md:mb-20">
           <h2 className="text-4xl md:text-5xl lg:text-[3.25rem] font-sora font-medium text-white tracking-tight leading-[1.1]">
             O que nossos alunos estão <span className="text-[#F5A623]">dizendo</span>
           </h2>
         </FadeIn>
 
-        {/* Desktop: 3-column grid */}
-        <div className="hidden md:grid grid-cols-3 gap-6 xl:gap-8 mb-6 xl:mb-8">
-          {testimonials.slice(0, 3).map((testimonial, i) => (
-            <FadeIn key={i} delay={i * 0.15}>
-              <div className="relative overflow-hidden rounded-[28px] bg-[#0A0A0A] border border-white/[0.06] p-8 lg:p-10 shadow-2xl h-full flex flex-col group transition-all duration-300 hover:border-white/[0.12]">
-                <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
-                <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#F5A623]/5 blur-[50px] rounded-full pointer-events-none"></div>
-                
-                <div className="relative z-10 flex flex-col h-full">
-                  {/* Quote icon */}
-                  <div className="text-[#F5A623] text-[48px] font-serif leading-none mb-4 select-none" aria-hidden="true">
-                    &ldquo;
-                  </div>
-                  
-                  {/* Testimonial text */}
-                  <p className="text-[14px] lg:text-[15px] text-gray-300 font-light leading-relaxed flex-1 mb-8">
-                    {testimonial.text}
-                  </p>
-                  
-                  {/* Author */}
-                  <div className="mt-auto pt-6 border-t border-white/[0.06]">
-                    <div className="font-sora font-medium text-white text-[15px]">{testimonial.name}</div>
-                    <div className="text-[12px] text-gray-500 font-light mt-1">Aluna da Mentoria</div>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-
-        {/* Desktop: 2-column row for remaining */}
-        <div className="hidden md:grid grid-cols-2 gap-6 xl:gap-8">
-          {testimonials.slice(3).map((testimonial, i) => (
-            <FadeIn key={i + 3} delay={(i + 3) * 0.15}>
-              <div className="relative overflow-hidden rounded-[28px] bg-[#0A0A0A] border border-white/[0.06] p-8 lg:p-10 shadow-2xl h-full flex flex-col group transition-all duration-300 hover:border-white/[0.12]">
-                <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
-                <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#F5A623]/5 blur-[50px] rounded-full pointer-events-none"></div>
-                
-                <div className="relative z-10 flex flex-col h-full">
-                  {/* Quote icon */}
-                  <div className="text-[#F5A623] text-[48px] font-serif leading-none mb-4 select-none" aria-hidden="true">
-                    &ldquo;
-                  </div>
-                  
-                  {/* Testimonial text */}
-                  <p className="text-[14px] lg:text-[15px] text-gray-300 font-light leading-relaxed flex-1 mb-8">
-                    {testimonial.text}
-                  </p>
-                  
-                  {/* Author */}
-                  <div className="mt-auto pt-6 border-t border-white/[0.06]">
-                    <div className="font-sora font-medium text-white text-[15px]">{testimonial.name}</div>
-                    <div className="text-[12px] text-gray-500 font-light mt-1">Aluna da Mentoria</div>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-
-        {/* Mobile: Single card carousel */}
-        <div className="md:hidden">
-          <div className="relative overflow-hidden rounded-[28px] bg-[#0A0A0A] border border-white/[0.06] p-8 shadow-2xl">
-            <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#F5A623]/5 blur-[50px] rounded-full pointer-events-none"></div>
-            
-            <div className="relative z-10">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -30 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
+        {/* Carousel viewport */}
+        <div className="relative overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentPage}
+              initial={{ opacity: 0, x: 60 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -60 }}
+              transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8"
+            >
+              {visibleTestimonials.map((testimonial, i) => (
+                <div
+                  key={currentPage * cardsPerPage + i}
+                  className="relative overflow-hidden rounded-[28px] bg-[#0A0A0A] border border-white/[0.06] p-8 lg:p-10 shadow-2xl flex flex-col group transition-all duration-300 hover:border-white/[0.12]"
                 >
-                  {/* Quote icon */}
-                  <div className="text-[#F5A623] text-[48px] font-serif leading-none mb-4 select-none" aria-hidden="true">
-                    &ldquo;
-                  </div>
+                  <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                  <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#F5A623]/5 blur-[50px] rounded-full pointer-events-none"></div>
                   
-                  <p className="text-[14px] text-gray-300 font-light leading-relaxed mb-8">
-                    {testimonials[activeIndex].text}
-                  </p>
-                  
-                  <div className="pt-6 border-t border-white/[0.06]">
-                    <div className="font-sora font-medium text-white text-[15px]">{testimonials[activeIndex].name}</div>
-                    <div className="text-[12px] text-gray-500 font-light mt-1">Aluna da Mentoria</div>
+                  <div className="relative z-10 flex flex-col h-full">
+                    {/* Quote icon */}
+                    <div className="text-[#F5A623] text-[48px] font-serif leading-none mb-4 select-none" aria-hidden="true">
+                      &ldquo;
+                    </div>
+                    
+                    {/* Testimonial text */}
+                    <p className="text-[14px] lg:text-[15px] text-gray-300 font-light leading-relaxed flex-1 mb-8">
+                      {testimonial.text}
+                    </p>
+                    
+                    {/* Author */}
+                    <div className="mt-auto pt-6 border-t border-white/[0.06]">
+                      <div className="font-sora font-medium text-white text-[15px]">{testimonial.name}</div>
+                      <div className="text-[12px] text-gray-500 font-light mt-1">Aluna da Mentoria</div>
+                    </div>
                   </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
+                </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-          {/* Pagination dots */}
-          <div className="flex items-center justify-center gap-2 mt-6">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveIndex(i)}
-                className={`transition-all duration-300 rounded-full ${
-                  i === activeIndex
-                    ? 'w-6 h-2 bg-[#F5A623]'
-                    : 'w-2 h-2 bg-white/20 hover:bg-white/40'
-                }`}
-              />
-            ))}
-          </div>
+        {/* Pagination dots */}
+        <div className="flex items-center justify-center gap-2.5 mt-10">
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i)}
+              className={`transition-all duration-400 rounded-full ${
+                i === currentPage
+                  ? 'w-8 h-2.5 bg-[#F5A623]'
+                  : 'w-2.5 h-2.5 bg-white/20 hover:bg-white/40'
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>
