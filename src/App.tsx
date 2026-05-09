@@ -89,7 +89,7 @@ function Hero() {
       {/* Background Elements - Perfecting the moody, grainy, glowing look */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Grain Overlay */}
-        <div className="absolute inset-0 z-20 opacity-[0.25] mix-blend-overlay" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+        <div className="absolute inset-0 z-20 opacity-[0.25] mix-blend-overlay" style={{backgroundImage: "url('/noise.svg')"}}></div>
         
         {/* Supernatural Glow Vibe */}
         <motion.div style={{ y: y1, opacity }} className="absolute top-1/2 right-[10%] -translate-y-[40%] w-[600px] h-[600px] sm:w-[900px] sm:h-[900px] rounded-full blur-[100px] bg-gradient-radial from-[#FF6B1A]/10 via-[#F5A623]/5 to-transparent"></motion.div>
@@ -104,13 +104,18 @@ function Hero() {
           className="absolute inset-0 md:top-0 md:left-auto md:right-0 w-full md:w-[60%] h-full flex items-end md:items-center justify-center mix-blend-screen md:[mask-image:linear-gradient(to_right,transparent,black_40%,black)] md:[-webkit-mask-image:linear-gradient(to_right,transparent,black_40%,black)]"
         >
           <img 
-             src="/hero-bg-mobile.png" 
+             src="/hero-bg-mobile.webp" 
              alt="Supernatural atmosphere"
+             width={750}
+             height={1334}
+             fetchPriority="high"
              className="block md:hidden w-full h-full object-cover object-[center_bottom]"
           />
           <img 
-             src="/hero-bg.png" 
+             src="/hero-bg.webp" 
              alt="Supernatural atmosphere"
+             width={1920}
+             height={1080}
              className="hidden md:block w-full h-full object-cover object-[70%_center]"
           />
         </motion.div>
@@ -139,8 +144,8 @@ function Hero() {
                     transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
                     className="flex w-max opacity-40 grayscale transition-opacity duration-500 hover:opacity-70"
                   >
-                    <img src="/ticker.png" alt="Logos" className="h-6 md:h-8 object-contain pr-8 pointer-events-none" />
-                    <img src="/ticker.png" alt="Logos" className="h-6 md:h-8 object-contain pr-8 pointer-events-none" />
+                    <img src="/ticker.webp" alt="Logos" width={600} height={32} loading="lazy" className="h-6 md:h-8 object-contain pr-8 pointer-events-none" />
+                    <img src="/ticker.webp" alt="Logos" width={600} height={32} loading="lazy" className="h-6 md:h-8 object-contain pr-8 pointer-events-none" />
                   </motion.div>
                 </FadeIn>
              </div>
@@ -185,12 +190,12 @@ function PainSection() {
             <FadeIn className="relative min-h-[400px] flex items-center justify-start lg:justify-center">
                <div className="absolute inset-0 bg-[#FF6B1A]/10 blur-[120px] rounded-full max-w-[80%] mx-auto pointer-events-none"></div>
                
-               {/* Animated Fire backdrop */}
+               {/* Animated Fire backdrop - reduced particles on mobile for GPU performance */}
                <div className="absolute inset-0 flex items-center justify-center opacity-80 pointer-events-none mix-blend-screen">
                  {/* Core Glow */}
-                 <div className="absolute w-[250px] h-[250px] bg-[#FF4500]/60 rounded-full blur-[60px] animate-pulse" style={{ animationDuration: '3s' }}></div>
+                 <div className="absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] bg-[#FF4500]/60 rounded-full blur-[60px] animate-pulse" style={{ animationDuration: '3s' }}></div>
 
-                 {/* Flame particles */}
+                 {/* Flame particles - 4 on mobile, 8 on desktop (rendered via CSS visibility) */}
                  {[...Array(8)].map((_, i) => (
                    <motion.div
                      key={`flame-${i}`}
@@ -212,7 +217,7 @@ function PainSection() {
                        delay: i * 0.25,
                        ease: "easeOut"
                      }}
-                     className={`absolute w-[120px] h-[120px] rounded-full blur-[25px] ${
+                     className={`absolute w-[80px] h-[80px] md:w-[120px] md:h-[120px] rounded-full blur-[25px] ${i >= 4 ? 'hidden md:block' : ''} ${
                        i % 3 === 0 ? 'bg-[#FF8C00]' : i % 2 === 0 ? 'bg-[#FF4500]' : 'bg-[#FFD700]'
                      }`}
                      style={{
@@ -356,7 +361,7 @@ function Phase1() {
                 <div className="relative overflow-hidden rounded-[32px] bg-[#0B0B0B] border border-white/[0.05] p-8 md:p-10 shadow-2xl h-full flex flex-col group transition-colors hover:border-white/[0.1]">
                   {/* Noise & Gradient background */}
                   <div className={`absolute top-0 left-0 w-[400px] h-[400px] bg-gradient-to-br ${block.color} via-transparent to-transparent opacity-[0.15] blur-[80px] -translate-x-1/3 -translate-y-1/3 pointer-events-none group-hover:opacity-[0.25] transition-opacity duration-700`}></div>
-                  <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                  <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
 
                   <div className="relative z-10 flex flex-col h-full">
                     {/* Top Header */}
@@ -527,7 +532,7 @@ function TrailsGrid() {
             <FadeIn key={idx} delay={idx * 0.1}>
               <div className="relative overflow-hidden rounded-[32px] bg-[#0A0A0A] border border-white/[0.06] p-8 md:p-12 group transition-all duration-300 hover:border-white/[0.12] shadow-2xl h-full flex flex-col">
                 {/* Noise overlay */}
-                <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
                 
                 {/* Bottom Glow Blur Element */}
                 <div className={`absolute -bottom-40 -inset-x-10 h-80 bg-gradient-to-r ${trail.glowClass} blur-[80px] opacity-[0.15] group-hover:opacity-[0.35] transition-opacity duration-700 pointer-events-none rounded-[100%]`}></div>
@@ -631,12 +636,15 @@ function WhoIs() {
         <div className="flex flex-col md:flex-row items-center gap-16">
           <FadeIn className="flex-1 w-full order-2 md:order-1 relative group">
              <motion.div style={{ y }} className="aspect-[4/5] rounded-[32px] bg-[#0A0A0A] border border-white/[0.06] relative overflow-hidden shadow-2xl transition-all duration-500 group-hover:border-white/[0.12]">
-                <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
                 <motion.div style={{ y: glowY }} className="absolute -inset-x-20 top-0 h-80 bg-gradient-to-b from-[#FF6B1A]/10 to-transparent blur-[60px] opacity-[0.3] pointer-events-none"></motion.div>
                 
                 <img
-                  src="/pastor-luciano.jpg"
+                  src="/pastor-luciano.webp"
                   alt="Pastor Luciano Fae"
+                  width={600}
+                  height={750}
+                  loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none"></div>
@@ -652,7 +660,7 @@ function WhoIs() {
             </p>
             <div className="flex flex-wrap gap-4 mt-8">
               <div className="relative overflow-hidden rounded-[24px] bg-[#0A0A0A] border border-white/[0.06] p-5 shadow-2xl flex-1 min-w-[160px]">
-                 <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                 <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
                  <div className="absolute inset-0 bg-gradient-to-br from-[#FF6B1A]/10 to-transparent blur-xl pointer-events-none"></div>
                  <div className="relative z-10">
                    <div className="text-3xl font-sora font-medium text-white mb-1">56K+</div>
@@ -661,7 +669,7 @@ function WhoIs() {
               </div>
 
               <div className="relative overflow-hidden rounded-[24px] bg-[#0A0A0A] border border-white/[0.06] p-5 shadow-2xl flex-1 min-w-[160px]">
-                 <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                 <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
                  <div className="absolute inset-0 bg-gradient-to-br from-[#F5A623]/10 to-transparent blur-xl pointer-events-none"></div>
                  <div className="relative z-10">
                    <div className="text-3xl font-sora font-medium text-white mb-1">+25</div>
@@ -670,7 +678,7 @@ function WhoIs() {
               </div>
 
               <div className="relative overflow-hidden rounded-[24px] bg-[#0A0A0A] border border-white/[0.06] p-5 shadow-2xl flex-1 min-w-[160px]">
-                 <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                 <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
                  <div className="absolute inset-0 bg-gradient-to-br from-[#FF6B1A]/10 to-transparent blur-xl pointer-events-none"></div>
                  <div className="relative z-10">
                    <div className="text-3xl font-sora font-medium text-white mb-1">+400</div>
@@ -710,94 +718,151 @@ function Testimonials() {
     }
   ];
 
-  // Desktop: 3 cards per page, Mobile: 1 card per page
-  const [currentPage, setCurrentPage] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [userInteracted, setUserInteracted] = useState(false);
+  const autoAdvanceRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  // Calculate which dot is active based on scroll position
+  const updateActiveIndex = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.children[0]?.getBoundingClientRect().width || 0;
+    const gap = 24; // gap-6 = 1.5rem = 24px
+    const scrollPos = el.scrollLeft;
+    const index = Math.round(scrollPos / (cardWidth + gap));
+    setActiveIndex(Math.min(index, testimonials.length - 1));
+  };
+
+  // Auto-advance (stops when user interacts)
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    if (userInteracted) return;
+
+    autoAdvanceRef.current = setInterval(() => {
+      const el = scrollRef.current;
+      if (!el) return;
+      const cardWidth = el.children[0]?.getBoundingClientRect().width || 0;
+      const gap = 24;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      const nextScroll = el.scrollLeft + cardWidth + gap;
+
+      if (nextScroll > maxScroll + 10) {
+        el.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        el.scrollTo({ left: nextScroll, behavior: 'smooth' });
+      }
+    }, 5000);
+
+    return () => {
+      if (autoAdvanceRef.current) clearInterval(autoAdvanceRef.current);
+    };
+  }, [userInteracted]);
+
+  // Detect user interaction
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let isPointerDown = false;
+
+    const handlePointerDown = () => { isPointerDown = true; };
+    const handlePointerUp = () => { isPointerDown = false; };
+    const handleScroll = () => {
+      updateActiveIndex();
+      if (isPointerDown) {
+        setUserInteracted(true);
+        if (autoAdvanceRef.current) clearInterval(autoAdvanceRef.current);
+      }
+    };
+    const handleWheel = () => {
+      setUserInteracted(true);
+      if (autoAdvanceRef.current) clearInterval(autoAdvanceRef.current);
+    };
+
+    el.addEventListener('pointerdown', handlePointerDown);
+    el.addEventListener('pointerup', handlePointerUp);
+    el.addEventListener('scroll', handleScroll, { passive: true });
+    el.addEventListener('wheel', handleWheel, { passive: true });
+
+    return () => {
+      el.removeEventListener('pointerdown', handlePointerDown);
+      el.removeEventListener('pointerup', handlePointerUp);
+      el.removeEventListener('scroll', handleScroll);
+      el.removeEventListener('wheel', handleWheel);
+    };
   }, []);
 
-  const cardsPerPage = isMobile ? 1 : 3;
-  const totalPages = Math.ceil(testimonials.length / cardsPerPage);
-
-  // Auto-advance
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentPage((prev) => (prev + 1) % totalPages);
-    }, 7000);
-    return () => clearInterval(interval);
-  }, [totalPages]);
-
-  const visibleTestimonials = testimonials.slice(
-    currentPage * cardsPerPage,
-    currentPage * cardsPerPage + cardsPerPage
-  );
+  // Scroll to specific card when dot is clicked
+  const scrollToCard = (index: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.children[0]?.getBoundingClientRect().width || 0;
+    const gap = 24;
+    el.scrollTo({ left: index * (cardWidth + gap), behavior: 'smooth' });
+    setActiveIndex(index);
+    setUserInteracted(true);
+    if (autoAdvanceRef.current) clearInterval(autoAdvanceRef.current);
+  };
 
   return (
     <section className="py-24 lg:py-32 bg-[#050505] relative overflow-hidden border-t border-white/[0.02]" id="testimonials">
-      <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+      <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
       
       <div className="container mx-auto px-6 max-w-[1400px] relative z-10">
         <FadeIn className="text-center mb-16 md:mb-20">
           <h2 className="text-4xl md:text-5xl lg:text-[3.25rem] font-sora font-medium text-white tracking-tight leading-[1.1]">
-            O que nossos alunos estão <span className="text-[#F5A623]">dizendo</span>
+            Vidas <span className="text-[#F5A623]">transformadas</span>
           </h2>
         </FadeIn>
 
-        {/* Carousel viewport */}
-        <div className="relative overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentPage}
-              initial={{ opacity: 0, x: 60 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -60 }}
-              transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8"
-            >
-              {visibleTestimonials.map((testimonial, i) => (
-                <div
-                  key={currentPage * cardsPerPage + i}
-                  className="relative overflow-hidden rounded-[28px] bg-[#0A0A0A] border border-white/[0.06] p-8 lg:p-10 shadow-2xl flex flex-col group transition-all duration-300 hover:border-white/[0.12]"
-                >
-                  <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
-                  <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#F5A623]/5 blur-[50px] rounded-full pointer-events-none"></div>
+        {/* Scrollable carousel */}
+        <div className="relative">
+          {/* Fade edges */}
+          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#050505] to-transparent z-20 pointer-events-none"></div>
+
+          <div
+            ref={scrollRef}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide cursor-grab active:cursor-grabbing"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {testimonials.map((testimonial, i) => (
+              <div
+                key={i}
+                className="w-[85vw] sm:w-[75vw] md:w-[calc(33.333%-16px)] shrink-0 snap-start relative overflow-hidden rounded-[28px] bg-[#0A0A0A] border border-white/[0.06] p-8 lg:p-10 shadow-2xl flex flex-col group transition-all duration-300 hover:border-white/[0.12]"
+              >
+                <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#F5A623]/5 blur-[50px] rounded-full pointer-events-none"></div>
+                
+                <div className="relative z-10 flex flex-col h-full">
+                  {/* Quote icon */}
+                  <div className="text-[#F5A623] text-[48px] font-serif leading-none mb-4 select-none" aria-hidden="true">
+                    &ldquo;
+                  </div>
                   
-                  <div className="relative z-10 flex flex-col h-full">
-                    {/* Quote icon */}
-                    <div className="text-[#F5A623] text-[48px] font-serif leading-none mb-4 select-none" aria-hidden="true">
-                      &ldquo;
-                    </div>
-                    
-                    {/* Testimonial text */}
-                    <p className="text-[14px] lg:text-[15px] text-gray-300 font-light leading-relaxed flex-1 mb-8">
-                      {testimonial.text}
-                    </p>
-                    
-                    {/* Author */}
-                    <div className="mt-auto pt-6 border-t border-white/[0.06]">
-                      <div className="font-sora font-medium text-white text-[15px]">{testimonial.name}</div>
-                      <div className="text-[12px] text-gray-500 font-light mt-1">Aluna da Mentoria</div>
-                    </div>
+                  {/* Testimonial text */}
+                  <p className="text-[14px] lg:text-[15px] text-gray-300 font-light leading-relaxed flex-1 mb-8">
+                    {testimonial.text}
+                  </p>
+                  
+                  {/* Author */}
+                  <div className="mt-auto pt-6 border-t border-white/[0.06]">
+                    <div className="font-sora font-medium text-white text-[15px]">{testimonial.name}</div>
+                    <div className="text-[12px] text-gray-500 font-light mt-1">Aluna da Mentoria</div>
                   </div>
                 </div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Pagination dots */}
         <div className="flex items-center justify-center gap-2.5 mt-10">
-          {Array.from({ length: totalPages }).map((_, i) => (
+          {testimonials.map((_, i) => (
             <button
               key={i}
-              onClick={() => setCurrentPage(i)}
+              onClick={() => scrollToCard(i)}
               className={`transition-all duration-400 rounded-full ${
-                i === currentPage
+                i === activeIndex
                   ? 'w-8 h-2.5 bg-[#F5A623]'
                   : 'w-2.5 h-2.5 bg-white/20 hover:bg-white/40'
               }`}
@@ -826,7 +891,7 @@ function ForWhom() {
           <FadeIn>
             <ScrollParallax offset={20}>
               <div className="relative overflow-hidden rounded-[32px] bg-[#0A0A0A] border border-white/[0.06] p-10 md:p-14 shadow-2xl h-full group transition-all duration-300 hover:border-white/[0.12]">
-                <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-green-500/5 blur-[100px] pointer-events-none rounded-full translate-x-1/3 -translate-y-1/3 group-hover:bg-green-500/10 transition-colors duration-700"></div>
 
                 <div className="relative z-10">
@@ -855,7 +920,7 @@ function ForWhom() {
           <FadeIn delay={0.2}>
             <ScrollParallax offset={-30}>
               <div className="relative overflow-hidden rounded-[32px] bg-[#0A0A0A] border border-white/[0.06] p-10 md:p-14 shadow-2xl h-full group transition-all duration-300 hover:border-white/[0.12]">
-                <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-500/5 blur-[100px] pointer-events-none rounded-full translate-x-1/3 -translate-y-1/3 group-hover:bg-red-500/10 transition-colors duration-700"></div>
 
                 <div className="relative z-10">
@@ -912,7 +977,7 @@ function FAQ() {
                   className={`relative overflow-hidden rounded-[24px] bg-[#0A0A0A] border transition-all duration-300 shadow-2xl cursor-pointer ${isOpen ? 'border-white/[0.12]' : 'border-white/[0.06] hover:border-white/[0.12]'}`}
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                 >
-                  <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                  <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
                   
                   <div className="p-7 md:p-8 relative z-10">
                     <div className="flex items-center justify-between font-sora font-medium text-[17px] text-white">
@@ -963,7 +1028,7 @@ function FinalCTA() {
 
   return (
     <section className="py-40 relative overflow-hidden bg-[#050505]" ref={ref}>
-      <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+      <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
       <motion.div style={{ y: glowY, x: '-50%' }} className="absolute top-1/2 left-1/2 -translate-y-1/2 w-[600px] h-[600px] sm:w-[900px] sm:h-[900px] rounded-full blur-[120px] bg-gradient-radial from-[#FF6B1A]/20 via-[#F5A623]/5 to-transparent pointer-events-none"></motion.div>
       
       <motion.div style={{ y: contentY }} className="container mx-auto px-6 text-center max-w-4xl relative z-10">
@@ -999,7 +1064,7 @@ function Header() {
         {/* Logo */}
         <div className="flex items-center">
           {/* O ícone do fogo fica para fora da margem. A margem é a mesma em todas as telas pois o tamanho do logo (h-10) é fixo. */}
-          <img src="/logo.png" alt="Luciano Fae Logo" className="h-10 w-auto object-contain -translate-y-1 -ml-3" />
+          <img src="/logo.webp" alt="Luciano Fae Logo" width={200} height={40} className="h-10 w-auto object-contain -translate-y-1 -ml-3" />
         </div>
 
         {/* Nav Pill */}
@@ -1034,7 +1099,7 @@ function Footer() {
       <div className="container mx-auto px-6 max-w-[1200px]">
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-0 mb-20">
           <div className="lg:w-1/4">
-            <img src="/logo.png" alt="Luciano Fae Logo" className="h-8 md:h-10 w-auto object-contain mb-4 -ml-3" />
+            <img src="/logo.webp" alt="Luciano Fae Logo" width={200} height={40} loading="lazy" className="h-8 md:h-10 w-auto object-contain mb-4 -ml-3" />
           </div>
           
           <div className="flex flex-wrap md:flex-nowrap gap-10 md:gap-16 lg:gap-24">
@@ -1091,7 +1156,7 @@ function Footer() {
 function WhatsappSupportSection() {
   return (
     <section className="py-32 bg-[#050505] relative overflow-hidden border-t border-white/[0.02]" id="support">
-      <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+      <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
       
       <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-[#4361ee]/5 blur-[140px] rounded-full pointer-events-none -translate-y-1/2 -translate-x-1/3"></div>
       <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-[#FF6B1A]/5 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
@@ -1099,7 +1164,7 @@ function WhatsappSupportSection() {
       <div className="container mx-auto px-6 max-w-[1200px] relative z-10">
         <div className="relative overflow-hidden rounded-[32px] bg-[#0A0A0A] border border-white/[0.06] p-10 md:p-16 lg:p-20 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-12 group transition-all duration-500 hover:border-white/[0.12]">
           
-          <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+          <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
           {/* Subtle highlight border */}
           <div className="absolute bottom-0 inset-x-12 h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-60 blur-[1px]"></div>
 
@@ -1113,7 +1178,7 @@ function WhatsappSupportSection() {
                 Você não vai <span className="text-gray-400">caminhar sozinho</span>
               </h2>
               <p className="text-[16px] text-gray-400 mb-0 font-light leading-relaxed max-w-[540px] mx-auto md:mx-0">
-                O acompanhamento é fortalecido por um grupo exclusivo, onde os participantes recebem suporte direto, direcionamento e orientação, criando um ambiente seguro de crescimento espiritual e comunhão. Aqui você tira suas dúvidas, compartilha experiências e cresce junto com outros guerreiros que estão na mesma jornada. Isso não é só um curso online — é uma mentoria real, com pessoas reais, caminhando juntas.
+                O acompanhamento é fortalecido por um grupo exclusivo, onde os participantes recebem suporte direto, direcionamento e orientação, criando um ambiente seguro de crescimento espiritual e comunhão. Aqui você tira suas dúvidas, compartilha experiências e cresce junto com outros guerreiros que estão na mesma jornada. Isso não é só um curso online, é uma mentoria real, com pessoas reais, caminhando juntas e manifestando o reino de Deus na terra.
               </p>
             </FadeIn>
           </div>
@@ -1196,7 +1261,7 @@ function ChatbotCTA() {
                 transition={{ duration: 0.3 }}
                 className="mb-4 w-[280px] bg-[#0A0A0A] border border-white/10 rounded-2xl rounded-br-sm shadow-2xl p-4 relative overflow-hidden"
               >
-                <div className="absolute inset-0 z-0 opacity-20 pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                <div className="absolute inset-0 z-0 opacity-20 pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
                 <div className="absolute -top-10 -right-10 w-24 h-24 bg-[#FF6B1A]/10 blur-[30px] rounded-full pointer-events-none"></div>
                 
                 <div className="relative z-10">
