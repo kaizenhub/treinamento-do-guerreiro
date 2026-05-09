@@ -647,7 +647,7 @@ function WhoIs() {
               O <span className="text-gray-400">mensageiro</span>
             </h2>
             <p className="text-[16px] text-gray-400 mb-8 max-w-2xl font-light leading-relaxed">
-              Luciano Fae é ministro de avivamento e cura, com um chamado ardente para despertar a igreja e treinar os guerreiros desta geração. 
+              Luciano Fae é ministro de avivamento, cura e libertação em alto nível, com um chamado ardente para despertar a igreja e treinar os guerreiros desta geração. 
               Sua vida é dedicada a ver os céus invadirem a terra através dos filhos de Deus devidamente equipados e posicionados.
             </p>
             <div className="flex flex-wrap gap-4 mt-8">
@@ -687,50 +687,163 @@ function WhoIs() {
 }
 
 function Testimonials() {
-  const reviews = [
-    "Durante 16 anos de vida nunca senti ou vivi algo tão bom e glorioso igual dia 20/10/2023. Nesse dia eu conheci uma menina e ela me perguntou se eu era batizada no espírito santo e eu disse a ela que estava quase lá. Chegando no culto sabia que a noite ia ser diferente, desde o começo do culto estava sentindo grandemente a presença de Deus, muita mesmo e foi que onde Deus usou o irmão Luciano para impor as mãos sobre mim e eu recebi o espírito santo e falei em línguas! Foi o melhor dia da minha vida, nunca esquecerei essa experiência, pra vocês que querem vai e se joga de cabeça porque não ah coisa melhor que essa presença gloriosa.",
-    "Que dia surreal! Eu estava lutando muito contra depressão e uma angústia enorme na alma. Antes de ir ao culto, eu fui falando com Deus sobre desistir de muitas coisas. Mas já no início do culto eu senti tão forte a presença, quando fui lá na frente, o irmão Luciano foi usado por Deus pra me falar tudo oque eu tinha falado com Deus, e eu senti o Espírito Santo como nunca tinha sentido antes, eu perdi a força do corpo e era como se tirasse toda a dor da alma com as mãos. Quando voltei ao meu lugar, eu ajoelhei pra orar e senti uma alegria tão grande, era tão grande que eu não conseguia parar de rir, a unção do espírito era palpável e parecia que eu estava sentindo cócegas por dentro, eu chorava de rir, de tanta alegria e alívio, aquela tristeza se tornou uma alegria e uma experiência que eu nunca vou esquecer!",
-    "Sobre ontem tive uma experiência espiritual surreal, no culto do Pastor Luciano, nessa minha caminhada com Deus há quase 4 meses, nunca havia sentido a presença de Deus tão forte, como senti no primeiro culto da campanha dele. Mas quando foi ontem no segundo culto, tive o presente mais lindo de Deus, que ansiava por alguns anos, e com a Maravilhosa ministração do Pastor, consegui finalmente abrir todas as portas, derrubar todas as muralhas que me impediam, e pela primeira vez falei em línguas.",
-    "Batizada no Espírito Santo. Foi coisa linda!",
-    "Eu recebi impartição dele. Esses dias meu marido estava com muitas dores no peito lado esquerdo. Como recebi impartição eu orei destruindo toda dor no nome de Jesus. E passou na hora, alguns minutos depois. E até hoje ele não sentiu mais aquela dor, já faz uma semana mais ou menos.",
-    "O Murilo foi curado através da sua oração, ele caiu na presença do Senhor e levantou sem dores, ele estava a meses com muita dor no joelho e depois da oração ele conseguiu fazer todos os movimentos que não conseguia mais. Deus abençoe sua vida, seu ministério e sua linda família."
+  const testimonials = [
+    {
+      name: "Luana de Jesus",
+      text: "Participei da mentoria com o apóstolo e foi um divisor de águas na minha vida. Aprendi princípios espirituais que fortaleceram minha fé e minha visão. Cada aula trouxe direção, clareza e crescimento pessoal. Senti o cuidado de Deus em cada palavra liberada. Hoje me sinto mais firme, alinhada e preparada para viver meu propósito. Sou grata por tudo que recebi e recomendo essa mentoria com todo meu coração."
+    },
+    {
+      name: "Sílvia",
+      text: "Sou a Sílvia Pires, e a mentoria para mim foi impactante, enriquecedora na minha vida. Quando cheguei na mentoria já tinha 15 anos de cristã. Mas foi com o conhecimento transformador da mentoria que em menos de 3 meses obtive uma evolução espiritual tremenda. Descobri formas de acessar o mundo espiritual, de quebrar maldições e alcançar libertação de verdade, as quais não são ensinadas na maioria dos lugares. E assim foi possível elevar o nível espiritual, de intimidade e comunhão com Deus. São ensinamentos valiosos que transformam nossas vidas do interior para o exterior! Gratidão por todo conhecimento que o Ap. Luciano entrega nessa mentoria!"
+    },
+    {
+      name: "Euzamar",
+      text: "Sou Euzamar da Silva, participei da mentoria com o pr Fae foi o melhor investimento que fiz, muito conhecimento e libertação e crescimento espiritual. Hoje consigo entender coisas que não entendia, através dele recebi impartições e estou muito feliz. Obrigado pr Fae por tudo, louvo a Deus pela sua vida."
+    },
+    {
+      name: "Sandra",
+      text: "Sou Sandra Silva. E entrei na mentoria e em um mês aprendi tanto o que uma vida inteira não tinha aprendido e em uma Live recebi variedades de línguas. Foi na mentoria que descobri meu chamado e meu ministério."
+    },
+    {
+      name: "Solange Góis",
+      text: "A mentoria realmente muda vidas. Em 40 anos de crente, não vivi o que estou vivendo em dois meses de mentoria. É realmente um ministério extraordinário."
+    }
   ];
 
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Auto-advance on mobile
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [testimonials.length]);
+
   return (
-    <section className="py-24 bg-[#050505] relative overflow-hidden border-t border-white/[0.02]">
+    <section className="py-24 lg:py-32 bg-[#050505] relative overflow-hidden border-t border-white/[0.02]" id="testimonials">
       <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
       
-      <div className="container mx-auto px-6 mb-16 relative z-10 text-center">
-        <FadeIn>
-          <h2 className="text-4xl md:text-5xl font-sora font-medium text-white tracking-tight">
-            Vidas <span className="text-[#F5A623]">transformadas</span>
+      <div className="container mx-auto px-6 max-w-[1200px] relative z-10">
+        <FadeIn className="text-center mb-16 md:mb-20">
+          <h2 className="text-4xl md:text-5xl lg:text-[3.25rem] font-sora font-medium text-white tracking-tight leading-[1.1]">
+            O que nossos alunos estão <span className="text-[#F5A623]">dizendo</span>
           </h2>
         </FadeIn>
-      </div>
 
-      <div className="relative z-10 flex overflow-hidden w-full group">
-        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-[#050505] to-transparent z-20 pointer-events-none"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-[#050505] to-transparent z-20 pointer-events-none"></div>
-
-        <div className="flex animate-marquee hover:[animation-play-state:paused] gap-6 px-3">
-          {[...reviews, ...reviews].map((review, i) => (
-            <div key={i} className="w-[320px] md:w-[420px] shrink-0 relative overflow-hidden rounded-[24px] bg-[#0A0A0A] border border-white/[0.06] p-8 shadow-xl flex flex-col justify-center min-h-[280px]">
-              <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#F5A623]/5 blur-[40px] rounded-full pointer-events-none"></div>
-              
-              <div className="relative z-10">
-                <Star className="w-5 h-5 text-[#F5A623] mb-6 opacity-80" />
-                <p className="text-[14px] text-gray-300 font-light leading-relaxed italic line-clamp-[12]">
-                  "{review}"
-                </p>
+        {/* Desktop: 3-column grid */}
+        <div className="hidden md:grid grid-cols-3 gap-6 xl:gap-8 mb-6 xl:mb-8">
+          {testimonials.slice(0, 3).map((testimonial, i) => (
+            <FadeIn key={i} delay={i * 0.15}>
+              <div className="relative overflow-hidden rounded-[28px] bg-[#0A0A0A] border border-white/[0.06] p-8 lg:p-10 shadow-2xl h-full flex flex-col group transition-all duration-300 hover:border-white/[0.12]">
+                <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#F5A623]/5 blur-[50px] rounded-full pointer-events-none"></div>
+                
+                <div className="relative z-10 flex flex-col h-full">
+                  {/* Quote icon */}
+                  <div className="text-[#F5A623] text-[48px] font-serif leading-none mb-4 select-none" aria-hidden="true">
+                    &ldquo;
+                  </div>
+                  
+                  {/* Testimonial text */}
+                  <p className="text-[14px] lg:text-[15px] text-gray-300 font-light leading-relaxed flex-1 mb-8">
+                    {testimonial.text}
+                  </p>
+                  
+                  {/* Author */}
+                  <div className="mt-auto pt-6 border-t border-white/[0.06]">
+                    <div className="font-sora font-medium text-white text-[15px]">{testimonial.name}</div>
+                    <div className="text-[12px] text-gray-500 font-light mt-1">Aluna da Mentoria</div>
+                  </div>
+                </div>
               </div>
-            </div>
+            </FadeIn>
           ))}
+        </div>
+
+        {/* Desktop: 2-column row for remaining */}
+        <div className="hidden md:grid grid-cols-2 gap-6 xl:gap-8">
+          {testimonials.slice(3).map((testimonial, i) => (
+            <FadeIn key={i + 3} delay={(i + 3) * 0.15}>
+              <div className="relative overflow-hidden rounded-[28px] bg-[#0A0A0A] border border-white/[0.06] p-8 lg:p-10 shadow-2xl h-full flex flex-col group transition-all duration-300 hover:border-white/[0.12]">
+                <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#F5A623]/5 blur-[50px] rounded-full pointer-events-none"></div>
+                
+                <div className="relative z-10 flex flex-col h-full">
+                  {/* Quote icon */}
+                  <div className="text-[#F5A623] text-[48px] font-serif leading-none mb-4 select-none" aria-hidden="true">
+                    &ldquo;
+                  </div>
+                  
+                  {/* Testimonial text */}
+                  <p className="text-[14px] lg:text-[15px] text-gray-300 font-light leading-relaxed flex-1 mb-8">
+                    {testimonial.text}
+                  </p>
+                  
+                  {/* Author */}
+                  <div className="mt-auto pt-6 border-t border-white/[0.06]">
+                    <div className="font-sora font-medium text-white text-[15px]">{testimonial.name}</div>
+                    <div className="text-[12px] text-gray-500 font-light mt-1">Aluna da Mentoria</div>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+
+        {/* Mobile: Single card carousel */}
+        <div className="md:hidden">
+          <div className="relative overflow-hidden rounded-[28px] bg-[#0A0A0A] border border-white/[0.06] p-8 shadow-2xl">
+            <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')"}}></div>
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#F5A623]/5 blur-[50px] rounded-full pointer-events-none"></div>
+            
+            <div className="relative z-10">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                >
+                  {/* Quote icon */}
+                  <div className="text-[#F5A623] text-[48px] font-serif leading-none mb-4 select-none" aria-hidden="true">
+                    &ldquo;
+                  </div>
+                  
+                  <p className="text-[14px] text-gray-300 font-light leading-relaxed mb-8">
+                    {testimonials[activeIndex].text}
+                  </p>
+                  
+                  <div className="pt-6 border-t border-white/[0.06]">
+                    <div className="font-sora font-medium text-white text-[15px]">{testimonials[activeIndex].name}</div>
+                    <div className="text-[12px] text-gray-500 font-light mt-1">Aluna da Mentoria</div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Pagination dots */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                className={`transition-all duration-300 rounded-full ${
+                  i === activeIndex
+                    ? 'w-6 h-2 bg-[#F5A623]'
+                    : 'w-2 h-2 bg-white/20 hover:bg-white/40'
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 function ForWhom() {
   return (
@@ -811,7 +924,7 @@ function ForWhom() {
 function FAQ() {
   const faqs = [
     { q: "Quando terei acesso ao treinamento?", a: "Seu acesso é liberado imediatamente após a confirmação do pagamento no seu email cadastrado." },
-    { q: "Por quanto tempo tenho acesso?", a: "Você terá acesso vitalício a todo o conteúdo da trilha escolhida, incluindo a Fase 1." },
+    { q: "Por quanto tempo tenho acesso?", a: "Você terá 1 ano de acesso a todo o conteúdo da trilha escolhida, incluindo a Fase 1." },
     { q: "É possível fazer o módulo Angelical direto?", a: "Não. Por se tratar de um nível profundo, exigimos que você passe antes pelas Trilhas de Cura, Libertação e Profético para segurança e alicerce adequados." },
     { q: "Posso acessar pelo celular?", a: "Sim, a plataforma é 100% responsiva e você também pode usar o app exclusivo para assistir offline." }
   ];
