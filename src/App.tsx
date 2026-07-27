@@ -1112,12 +1112,12 @@ function EbookSection() {
               </div>
 
               {/* CTA Button */}
-              <div className="relative group/btnwrap w-full md:w-auto inline-block">
+              <div className="relative group/btnwrap w-full md:w-auto flex md:inline-flex">
                 <a
                   href="https://pay.kiwify.com.br/hj9p35O"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative rounded-full px-8 py-4 flex items-center justify-center gap-3 text-[16px] font-medium text-white group/btn w-full md:w-auto"
+                  className="relative rounded-full px-6 py-4 sm:px-8 sm:py-4 flex items-center justify-center gap-2 sm:gap-3 text-[14px] sm:text-[16px] font-medium text-white group/btn w-full md:w-auto whitespace-nowrap"
                 >
                   {/* Gradient Border */}
                   <div
