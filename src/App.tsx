@@ -1017,6 +1017,134 @@ function FAQ() {
   );
 }
 
+function EbookSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+  const glowY = useTransform(scrollYProgress, [0, 1], [-80, 80]);
+
+  return (
+    <section className="py-32 bg-[#050505] relative overflow-hidden border-t border-white/[0.02]" id="ebook" ref={ref}>
+      {/* Noise */}
+      <div className="absolute inset-0 z-0 opacity-[0.25] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
+
+      {/* Warm ambient glows */}
+      <motion.div style={{ y: glowY }} className="absolute top-1/2 left-[15%] -translate-y-1/2 w-[500px] h-[500px] bg-[#D4A574]/8 blur-[140px] rounded-full pointer-events-none"></motion.div>
+      <motion.div style={{ y: glowY }} className="absolute top-1/3 right-[10%] w-[400px] h-[400px] bg-[#F5A623]/5 blur-[120px] rounded-full pointer-events-none"></motion.div>
+
+      <div className="container mx-auto px-6 max-w-[1200px] relative z-10">
+        <div className="relative overflow-hidden rounded-[32px] bg-[#0A0A0A] border border-white/[0.06] shadow-2xl group transition-all duration-500 hover:border-white/[0.12]">
+          {/* Inner noise */}
+          <div className="absolute inset-0 z-0 opacity-[0.1] mix-blend-overlay pointer-events-none" style={{backgroundImage: "url('/noise.svg')"}}></div>
+
+          {/* Warm glow from bottom */}
+          <div className="absolute -bottom-40 inset-x-0 h-80 bg-gradient-to-r from-[#D4A574] via-[#F5A623] to-[#D4A574] blur-[100px] opacity-[0.08] group-hover:opacity-[0.18] transition-opacity duration-700 pointer-events-none rounded-[100%]"></div>
+
+          {/* Highlight borders */}
+          <div className="absolute bottom-0 inset-x-12 h-[2px] bg-gradient-to-r from-transparent via-[#D4A574]/20 to-transparent opacity-60 blur-[1px]"></div>
+          <div className="absolute bottom-0 inset-x-20 h-[1px] bg-gradient-to-r from-transparent via-[#D4A574]/40 to-transparent opacity-80"></div>
+
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-10 md:gap-16 p-10 md:p-16 lg:p-20">
+
+            {/* Left: Ebook Image */}
+            <FadeIn className="flex-shrink-0 w-full md:w-auto flex justify-center">
+              <motion.div style={{ y: imgY }} className="relative group/img">
+                {/* Soft glow behind the image */}
+                <div className="absolute inset-0 bg-[#D4A574]/15 blur-[50px] rounded-3xl scale-110 pointer-events-none group-hover/img:bg-[#D4A574]/25 transition-colors duration-700"></div>
+
+                <img
+                  src="/ebook-espirito-santo.png"
+                  alt="Ebook Fale nas Línguas do Espírito Santo - Luciano Faé"
+                  width={380}
+                  height={500}
+                  loading="lazy"
+                  className="relative z-10 w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px] h-auto rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] transition-transform duration-700 group-hover/img:scale-[1.03] group-hover/img:-rotate-1"
+                />
+              </motion.div>
+            </FadeIn>
+
+            {/* Right: Content */}
+            <FadeIn delay={0.2} className="flex-1 text-center md:text-left">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#D4A574]/10 border border-[#D4A574]/20 mb-6">
+                <BookOpen className="w-[14px] h-[14px] text-[#D4A574]" />
+                <span className="text-[#D4A574] text-[13px] font-medium tracking-wide">E-book Exclusivo</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-sora font-medium mb-6 text-white tracking-tight leading-[1.15]">
+                Fale nas Línguas do{' '}
+                <span className="text-[#D4A574]">Espírito Santo</span>
+              </h2>
+
+              <p className="text-[16px] text-gray-400 mb-8 font-light leading-relaxed max-w-[540px] mx-auto md:mx-0">
+                Um guia profundo e prático para você entender, buscar e operar no dom de línguas. 
+                Descubra o que a Bíblia realmente ensina sobre falar em línguas e como isso pode 
+                transformar sua vida de oração e intimidade com Deus.
+              </p>
+
+              {/* Key points */}
+              <ul className="space-y-4 mb-10 text-left">
+                {[
+                  "O fundamento bíblico do dom de línguas",
+                  "Como buscar e receber essa manifestação",
+                  "A diferença entre línguas devocional e profética",
+                  "Exercícios práticos de ativação espiritual"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start text-gray-300 text-[15px] font-light">
+                    <CheckCircle2 className="w-[18px] h-[18px] text-[#D4A574]/80 mr-4 shrink-0 mt-[2px]" />
+                    <span className="leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Author */}
+              <div className="flex items-center gap-3 mb-10 justify-center md:justify-start">
+                <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10">
+                  <img src="/pastor-luciano.webp" alt="Luciano Faé" width={40} height={40} loading="lazy" className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <div className="text-white text-[14px] font-medium">Luciano Faé</div>
+                  <div className="text-gray-500 text-[12px] font-light">Autor</div>
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <div className="relative group/btnwrap w-full md:w-auto inline-block">
+                <a
+                  href="https://pay.kiwify.com.br/hj9p35O"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative rounded-full px-8 py-4 flex items-center justify-center gap-3 text-[16px] font-medium text-white group/btn w-full md:w-auto"
+                >
+                  {/* Gradient Border */}
+                  <div
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-[#D4A574] via-[#F5A623] to-[#D4A574] pointer-events-none"
+                    style={{
+                      padding: '1.5px',
+                      WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                      WebkitMaskComposite: 'xor',
+                      maskComposite: 'exclude'
+                    }}
+                  ></div>
+                  {/* Hover Glow Background */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#D4A574] via-[#F5A623] to-[#D4A574] opacity-0 group-hover/btnwrap:opacity-[0.15] transition-opacity duration-300 pointer-events-none"></div>
+
+                  <BookOpen className="relative z-10 w-5 h-5" />
+                  <span className="relative z-10 tracking-wide">Quero Meu E-book</span>
+                  <span className="relative z-10 text-xl leading-none transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
+                </a>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FinalCTA() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -1321,6 +1449,7 @@ export default function App() {
       <Hero />
       <PainSection />
       <TheJourney />
+      <EbookSection />
       <Phase1 />
       <TrailsGrid />
       <WhoIs />
